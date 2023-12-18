@@ -11,7 +11,15 @@ public class CursoDTO {
     private int cargaHoraria;
     private List<AlunosDTO> alunosDTOS;
 
+
     public CursoDTO() {
+    }
+
+    public CursoDTO(Long id, String nome, LocalDateTime dataDeCadastro, int cargaHoraria) {
+        this.id = id;
+        this.nome = nome;
+        this.dataDeCadastro = dataDeCadastro;
+        this.cargaHoraria = cargaHoraria;
     }
 
     public CursoDTO(Long id, String nome, LocalDateTime dataDeCadastro, int cargaHoraria, List<AlunosDTO> alunosDTOS) {
@@ -59,5 +67,14 @@ public class CursoDTO {
 
     public void setCargaHoraria(int cargaHoraria) {
         this.cargaHoraria = cargaHoraria;
+    }
+
+    @JsonIgnore
+    public List<AlunosDTO> getAlunosDTOS() {
+        return alunosDTOS;
+    }
+
+    public void setAlunosDTOS(List<AlunosDTO> alunosDTOS) {
+        this.alunosDTOS = alunosDTOS;
     }
 }

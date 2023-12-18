@@ -1,4 +1,6 @@
 package com.example.desafio.models;
+import com.example.desafio.dtos.AlunoDTOParaPost;
+import com.example.desafio.dtos.AlunosDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.io.Serializable;
@@ -50,6 +52,18 @@ public class Alunos implements Serializable {
         this.email = email;
         this.numeroDeTelefone = numeroDeTelefone;
         this.cursos = cursos;
+    }
+
+    public Alunos(AlunoDTOParaPost data) {
+        this.id = data.getId();
+        this.nome = data.getNome();
+        this.email = data.getEmail();
+        this.cep = data.getCep();
+        this.endereco = data.getEndereco();
+        this.numeroDeTelefone = data.getNumeroDeTelefone();
+        this.cpf = data.getCpf();
+        Cursos cursos = new Cursos();
+        cursos.setId(data.getId());
     }
 
     public Long getId() {

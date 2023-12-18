@@ -5,7 +5,6 @@ import com.example.desafio.models.Alunos;
 public class AlunosDTO {
     private Long id;
     private String nome;
-    //private String cpf;
     private String email;
     private String endereco;
     private String cep;
@@ -22,8 +21,6 @@ public class AlunosDTO {
         this.numeroDeTelefone = numeroDeTelefone;
         this.endereco = endereco;
         this.cep = cep;
-        //,String cpf
-        //this.cpf = cpf;
         this.curso = curso;
     }
 
@@ -31,7 +28,6 @@ public class AlunosDTO {
         this.id = entity.getId();
         this.nome = entity.getNome();
         this.email = entity.getEmail();
-        //this.cpf = entity.getCpf();
         this.numeroDeTelefone = entity.getNumeroDeTelefone();
         this.endereco = entity.getEndereco();
         this.cep = entity.getCep();
@@ -100,11 +96,4 @@ public class AlunosDTO {
     public void setCep(String cep) {
         this.cep = cep;
     }
-    /* public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }*/
 }

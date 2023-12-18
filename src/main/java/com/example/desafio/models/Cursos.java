@@ -1,4 +1,5 @@
 package com.example.desafio.models;
+import com.example.desafio.dtos.CursoDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -24,13 +25,26 @@ public class Cursos implements Serializable {
     @OneToMany(mappedBy = "cursos", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<Alunos> alunosCadastrados;
 
+    //private int quantidadeDeAlunosNoCurso;
+
+
     public Cursos() {
     }
-    public Cursos(Long id, String nome, int cargaHoraria) {
+    public Cursos(Long id, String nome, int cargaHoraria, int quantidadeDeAlunosNoCurso) {
         this.id = id;
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
+       //this.quantidadeDeAlunosNoCurso = quantidadeDeAlunosNoCurso;
     }
+
+   /* public int getQuantidadeDeAlunosNoCurso() {
+        return quantidadeDeAlunosNoCurso;
+    }
+
+    public void setQuantidadeDeAlunosNoCurso(int quantidadeDeAlunosNoCurso) {
+        this.quantidadeDeAlunosNoCurso = quantidadeDeAlunosNoCurso;
+    }*/
+
     @JsonIgnore
     public List<Alunos> getAlunosCadastrados() {
         return alunosCadastrados;

@@ -66,5 +66,36 @@ Projeto é um CRUD padrão que visa fazer um controle sobre Cursos e Alunos
 
 
 
+***Corpo para requisição de POST para alunos*** 
+`{
+"nome": "",
+"cpf": "00000000000000",
+"endereco": "",
+"cep": "65110-000",
+"email": "example@gmail.com",
+"numeroDeTelefone": "123456789012",
+"curso": "id do curso que o aluno vai ser atrelado"
+}`
+
+***Corpo para requisição de PUT para alunos***
+`{
+"nome": "",
+"endereco": "",
+"cep": "65110-000",
+"email": "example@gmail.com",
+"numeroDeTelefone": "123456789012",
+"curso": "id do curso que o aluno vai ser atrelado"
+}`
 
 
+***Corpo para requisição de POST para cursos***
+`{
+"nome":"",
+"cargaHoraria":""
+}`
+
+***Corpo para requisição de PUT para cursos***
+`{
+"nome":"",
+"cargaHoraria":""
+}`
