@@ -28,7 +28,24 @@ public class AlunoService {
         } else if (alunoRepository.existsByNumeroDeTelefone(alunos.getNumeroDeTelefone())) {
             throw new CampoInvalidoException("O Numero de telefone informado ja existe no sistema");
         }
-             Alunos novoAluno = new Alunos();
+            Alunos novoAluno = new Alunos();
+        if (alunos.getNome().isEmpty()){
+            throw new CampoInvalidoException("nome vazio");
+        }
+        else if(alunos.getEmail().isEmpty()){
+            throw new CampoInvalidoException("email vazio");
+        }
+        else if (alunos.getCpf().isEmpty()){
+            throw new CampoInvalidoException("cpf vazio");
+        }
+        else if (alunos.getCep().isEmpty()){
+            throw new CampoInvalidoException("cep vazio");
+        } else if (alunos.getEndereco().isEmpty()) {
+            throw new CampoInvalidoException("Endereço vazio");
+        } else if (alunos.getNumeroDeTelefone().isEmpty()) {
+            throw new CampoInvalidoException("Numero de telefone vazio");
+        }
+        else {
             novoAluno.setNome(alunos.getNome());
             novoAluno.setId(alunos.getId());
             novoAluno.setEmail(alunos.getEmail());
@@ -37,12 +54,13 @@ public class AlunoService {
             novoAluno.setEndereco(alunos.getEndereco());
             novoAluno.setNumeroDeTelefone(alunos.getNumeroDeTelefone());
 
-        Cursos cursos = cursoRepository.findById(alunos.getCurso())
+            Cursos cursos = cursoRepository.findById(alunos.getCurso())
                     .orElseThrow(() ->
                             new ResourceNotFoundException("O curso com o id passado não existe. Por favor cadastre-o para concluir a ação"));
             novoAluno.setCursos(cursos);
 
             return alunoRepository.save(novoAluno);
+        }
     }
     public List<AlunosDTO> findALl(){
        List<Alunos> alunosList = alunoRepository.findAll();
@@ -69,25 +87,35 @@ public class AlunoService {
         }
     }
     public Alunos updade(AlunoDTOGetById alunos, Long id){
-        try{
             Alunos entity = alunoRepository.findById(id).orElseThrow(() ->
                     new ResourceNotFoundException("O aluno com o id passado não existe. Por favor cadastre-o para concluir a ação"));
-            entity.setNome(alunos.getNome());
-            entity.setEmail(alunos.getEmail());
-            entity.setNumeroDeTelefone(alunos.getNumeroDeTelefone());
-            entity.setEndereco(alunos.getEndereco());
-            entity.setCep(alunos.getCep());
+            if (alunos.getNome().isEmpty()){
+                throw new CampoInvalidoException("O nome está vazio");
+            } else if (alunos.getEmail().isEmpty()) {
+                throw new CampoInvalidoException("O email está vazio");
+            } else if (alunos.getCep().isEmpty()) {
+                throw new CampoInvalidoException("O cep está vazio");
+            } else if (alunos.getNumeroDeTelefone().isEmpty()) {
+                throw new CampoInvalidoException("O Numero de telefone está vazio");
+            } else if (alunos.getEndereco().isEmpty()) {
+                throw new CampoInvalidoException("O endereço está vazio");
+            }
+            else {
+                entity.setNome(alunos.getNome());
+                entity.setEmail(alunos.getEmail());
+                entity.setNumeroDeTelefone(alunos.getNumeroDeTelefone());
+                entity.setEndereco(alunos.getEndereco());
+                entity.setCep(alunos.getCep());
 
-            Cursos cursos = cursoRepository.findById(alunos.getCurso()).orElseThrow();
-            entity.setCursos(cursos);
+                Cursos cursos = cursoRepository.findById(alunos.getCurso()).orElseThrow();
+                entity.setCursos(cursos);
 
-            alunoRepository.save(entity);
+                alunoRepository.save(entity);
 
-            return entity;
-        }
-        catch (Exception e){
-            throw new CampoInvalidoException("Não foi possivel cadastrar o aluno, pois há um campo invalido ou faltando. Tente novamente");
-        }
+                return entity;
+            }
+
+
     }
 
 }

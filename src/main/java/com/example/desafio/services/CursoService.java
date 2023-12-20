@@ -21,6 +21,12 @@ public class CursoService {
     @Autowired
     private CursoRepository repository;
     public Cursos create(CursoDTO cursos){
+        if (cursos.getNome().isEmpty()){
+            throw new CampoInvalidoException("Nome do curso está vazio");
+        } else if (cursos.getCargaHoraria() == 0) {
+            throw new CampoInvalidoException("Carga Horaria do curso invalido");
+        }
+        else {
             Cursos entity = new Cursos();
             entity.setId(cursos.getId());
             entity.setNome(cursos.getNome());
@@ -30,6 +36,8 @@ public class CursoService {
             }
             repository.save(entity);
             return entity;
+
+        }
     }
 
     public List<CursoAlunoDTO>findAll(){
@@ -66,14 +74,19 @@ public class CursoService {
     public Cursos update(Cursos cursos, Long id){
         Cursos entity = repository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException("O curso com o id passado não existe. Por favor cadastre-o para concluir a ação"));
-
-        entity.setNome(cursos.getNome());
-        entity.setCargaHoraria(cursos.getCargaHoraria());
-        if (entity.getNome() == null || entity.getCargaHoraria() == 0 ) {
-            throw new CampoInvalidoException("Não foi possivel atualizar o curso, pois há um campo invalido ou faltando. Tente novamente");
+        if (cursos.getNome().isEmpty() || cursos.getCargaHoraria() == 0){
+            throw new CampoInvalidoException("O nome do curso está vazio");
         }
-        repository.save(entity);
+        else {
+            entity.setNome(cursos.getNome());
+            entity.setCargaHoraria(cursos.getCargaHoraria());
+      /*  if (entity.getNome().isEmpty() || entity.getCargaHoraria() == 0 ) {
+            throw new CampoInvalidoException("Não foi possivel atualizar o curso, pois há um campo invalido ou faltando. Tente novamente");
+        }*/
+            repository.save(entity);
 
-        return entity;
+            return entity;
+
+        }
     }
 }

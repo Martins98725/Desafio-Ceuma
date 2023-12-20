@@ -37,4 +37,8 @@ public class AlunoController {
     public Alunos update(@RequestBody AlunoDTOGetById alunos, @PathVariable Long id){
         return this.service.updade(alunos, id);
     }
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        this.service.delete(id);
+    }
 }
