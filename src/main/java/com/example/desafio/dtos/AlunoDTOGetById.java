@@ -5,15 +5,17 @@ public class AlunoDTOGetById {
     private String nome;
     private String email;
     private String endereco;
+    private String cpf;
     private String cep;
     private String numeroDeTelefone;
     private Long curso;
 
-    public AlunoDTOGetById(Long id, String nome, String email, String endereco, String cep, String numeroDeTelefone, Long curso) {
+    public AlunoDTOGetById(Long id, String nome, String email, String endereco, String cpf, String cep, String numeroDeTelefone, Long curso) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.endereco = endereco;
+        this.cpf = cpf;
         this.cep = cep;
         this.numeroDeTelefone = numeroDeTelefone;
         this.curso = curso;
@@ -24,6 +26,14 @@ public class AlunoDTOGetById {
 
     public Long getId() {
         return id;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public void setId(Long id) {

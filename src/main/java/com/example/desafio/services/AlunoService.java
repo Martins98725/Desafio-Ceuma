@@ -102,6 +102,10 @@ public class AlunoService {
             }
             else {
                 entity.setNome(alunos.getNome());
+                if (alunoRepository.existsByCpf(alunos.getCpf())){
+                    throw new CampoInvalidoException("O CPF cadastrado já existe no sistema");
+                }
+                entity.setCpf(alunos.getCpf());
                 entity.setEmail(alunos.getEmail());
                 entity.setNumeroDeTelefone(alunos.getNumeroDeTelefone());
                 entity.setEndereco(alunos.getEndereco());
@@ -114,8 +118,5 @@ public class AlunoService {
 
                 return entity;
             }
-
-
     }
-
 }
