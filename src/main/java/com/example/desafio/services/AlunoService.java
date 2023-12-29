@@ -49,9 +49,15 @@ public class AlunoService {
             novoAluno.setNome(alunos.getNome());
             novoAluno.setId(alunos.getId());
             novoAluno.setEmail(alunos.getEmail());
+            if (alunos.getCpf().length() < 14){
+                throw new CampoInvalidoException("O CPF está faltanto caracter");
+            }
             novoAluno.setCpf(alunos.getCpf());
             novoAluno.setCep(alunos.getCep());
             novoAluno.setEndereco(alunos.getEndereco());
+            if (alunos.getNumeroDeTelefone().length() < 13){
+                throw new CampoInvalidoException("O Numero de telefone está faltanto caracter");
+            }
             novoAluno.setNumeroDeTelefone(alunos.getNumeroDeTelefone());
 
             Cursos cursos = cursoRepository.findById(alunos.getCurso())
@@ -105,8 +111,14 @@ public class AlunoService {
                 if (alunoRepository.existsByCpf(alunos.getCpf())){
                     throw new CampoInvalidoException("O CPF cadastrado já existe no sistema");
                 }
+                if (alunos.getCpf().length() < 14){
+                    throw new CampoInvalidoException("O CPF está faltanto caracter");
+                }
                 entity.setCpf(alunos.getCpf());
                 entity.setEmail(alunos.getEmail());
+                if (alunos.getNumeroDeTelefone().length() < 13){
+                    throw new CampoInvalidoException("O Numero de telefone está faltanto caracter");
+                }
                 entity.setNumeroDeTelefone(alunos.getNumeroDeTelefone());
                 entity.setEndereco(alunos.getEndereco());
                 entity.setCep(alunos.getCep());
